@@ -1,0 +1,58 @@
+<html>
+    <body>
+        <div id="main"></div>
+    </body>
+    <script>
+        const divAdder = (text, parent) => {
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = text;
+            parent.appendChild(tempDiv);
+        }
+        function Customer (id, firstName, lastName, email, mobile, gender, address, dateOfBirth, city, state, country) {
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.mobile = mobile;
+            this.gender = gender;
+            this.address = address;
+            this.dateOfBirth = dateOfBirth;
+            this.city = city;
+            this.state = state;
+            this.country = country;
+            this.showDetails = () => {
+                const main = document.getElementById("main");
+                divAdder("=============================================", main);
+                console.log("=============================================");
+                divAdder("Creating JS Object using Object Constructor", main);
+                console.log("Creating JS Object using Object Constructor");
+                divAdder("=============================================", main);
+                console.log("=============================================");
+                divAdder("Customer Details", main);
+                console.log("Customer Details");
+                divAdder("----------------------------------------------------------------------------", main);
+                const table = document.createElement("table");
+                const self = this;
+                for (entry of Object.entries(self)) {
+                    if (entry[0] !== "showDetails") {
+                        const tr = document.createElement("tr");
+                        const tc1 = document.createElement("td");
+                        const tc2 = document.createElement("td");
+                        const result = entry[0].replace(/([A-Z])/g, " $1");
+                        const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+                        tc1.innerHTML = "Customer " + finalResult;
+                        tc2.innerHTML = ": " + entry[1];
+                        console.log("Customer " + finalResult + '\t' + ": " + entry[1]);
+                        tr.appendChild(tc1);
+                        tr.appendChild(tc2);
+                        table.appendChild(tr);
+                    }
+                }
+                main.appendChild(table);
+                divAdder("----------------------------------------------------------------------------", main);
+            };
+        }
+        const customer = new Customer(1410, "Hrutikesh", "Jain", "hrutikesh.jain@gmail.com", "7758000225", "Male", "Nira", "14/10/1996", "Nira", "Maharashtra", "India");
+        customer.showDetails();
+    </script>
+</html>
